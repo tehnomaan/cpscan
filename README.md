@@ -17,3 +17,10 @@ CP-scan is a Java library for finding and loading files from classpath. CP-scan 
 		System.out.println("File contents:\n" + list.get(0).content);
 ```
 
+# Usage in Build Script
+
+Add this dependency to build.gradle:
+
+dependencies {
+    implementation 'eu.miltema:cp-scan:1.0.0'
+}
