@@ -1,5 +1,5 @@
 # CP-scan
-CP-scan is a Java library for finding files from classpath. CP-scan has no dependencies other than Java 11+.
+CP-scan is a Java library for finding and loading files from classpath. CP-scan has no dependencies other than Java 11+.
 
 # Basic Usage
 
@@ -13,5 +13,7 @@ CP-scan is a Java library for finding files from classpath. CP-scan has no depen
 		List<FileTuple> list = new FileScanner(name -> name.endsWith(".txt")).
 			scan("testfolder").
 			collect(toList());
+		System.out.println("File path is " + list.get(0).path);
+		System.out.println("File contents:\n" + list.get(0).content);
 ```
 
