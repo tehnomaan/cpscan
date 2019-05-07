@@ -1,5 +1,6 @@
 # CP-scan
 CP-scan is a Java library for finding and loading files from classpath. CP-scan has no dependencies other than Java 11+.
+It only seems to work inside war and does not work when run as standalone java program.
 
 # Basic Usage
 
@@ -22,5 +23,5 @@ CP-scan is a Java library for finding and loading files from classpath. CP-scan 
 Add this dependency to build.gradle:
 
 dependencies {
-    implementation 'eu.miltema:cp-scan:1.0.0'
+    implementation 'eu.miltema:cp-scan:1.0.1'
 }
