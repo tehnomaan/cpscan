@@ -57,7 +57,8 @@ abstract public class ClasspathScanner<T> {
 	}
 
 	private void scanDir(File dir, int rootPathLength) throws IOException, ClassNotFoundException {
-		for(File file : dir.listFiles((d, name) -> !name.startsWith(".") && (d.isDirectory() || filenameFilter.test(name)))) {
+		FileFilter ff = f -> !f.getName().startsWith(".") && (filenameFilter.test(f.getName()) || f.isDirectory());
+		for(File file : dir.listFiles(ff)) {
 			String path = file.getPath().replaceAll("\\" + File.separatorChar + "", ".");
 			if (!file.isDirectory()) {
 				boolean included = includedFolderNames.length == 0;//if package name list was not specified, then scan all packages
