@@ -9,6 +9,7 @@ import java.util.function.*;
 public class FileScanner extends ClasspathScanner<FileTuple> {
 
 	private Consumer<String> logger = s -> {};
+	private String encoding = "utf8";
 
 	/**
 	 * Construct scanner with filename filter and no logger
@@ -28,6 +29,16 @@ public class FileScanner extends ClasspathScanner<FileTuple> {
 		this.logger = logger;
 	}
 
+	/**
+	 * Set the encoding of the files to read. If this method is not used, default encoding is utf8
+	 * @param encoding encoding
+	 * @return FileScanner object
+	 */
+	public FileScanner encoding(String encoding) {
+		this.encoding = encoding;
+		return this;
+	}
+
 	@Override
 	protected FileTuple entryFound(String relativePath, FileContentSupplier fileContentSupplier) {
 		try {
@@ -35,8 +46,8 @@ public class FileScanner extends ClasspathScanner<FileTuple> {
 			tuple.path = relativePath;
 			byte[] bytes = fileContentSupplier.readFile();
 			if (bytes.length >= 3 && bytes[0] == -17 && bytes[1] == -69 && bytes[2] == -65)//UTF8 BOM
-				tuple.content = new String(bytes, 3, bytes.length - 3);
-			else tuple.content = new String(bytes);
+				tuple.content = new String(bytes, 3, bytes.length - 3, encoding);
+			else tuple.content = new String(bytes, encoding);
 			return tuple;
 		}
 		catch(Throwable t) {

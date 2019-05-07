@@ -41,8 +41,8 @@ public class TestCpScanner {
 	@Test
 	public void testFileScanner() throws Exception {
 		List<FileTuple> list = new FileScanner(name -> name.endsWith(".txt")).scan("testfolder").collect(toList());
-		assertEquals(1, list.size());
+		assertEquals(1, list.size());//file b.ttx must be ignored
 		assertEquals("testfolder" + File.separator + "b.txt", list.get(0).path);
-		assertEquals("b", list.get(0).content);
+		assertEquals("bäžÕ", list.get(0).content);
 	}
 }
